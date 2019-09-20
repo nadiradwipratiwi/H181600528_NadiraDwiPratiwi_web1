@@ -38,11 +38,11 @@
                                 @enderror
                             </div>
                         </div>
-                         <div class="form-group row">
+                        <div class="form-group row">
                             <label for="Contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Contact" type="text" class="form-control @error('Contact') is-invalid @enderror" name="Contact" value="{{ old('Contact') }}" required autocomplete="Contact" autofocus>
+                                <input id="Contact" type="text" class="form-control @error('Contact') is-invalid @enderror" name="Contact" value="{{ old('Contact') }}" required autocomplete="email" autofocus>
 
                                 @error('Contact')
                                     <span class="invalid-feedback" role="alert">
@@ -59,10 +59,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                               <label for="captcha" class="col-md-4 col-form-label text-md-right">{{ __('Captcha') }}</label>
+                            <label for="captcha" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
 
                             <div class="col-md-6">
-                                <input id="captcha" type="captcha" class="form-control @error('captcha') is-invalid @enderror" name="captcha" value="{{ old('captcha') }}" required autocomplete="captcha" autofocus>
+                                <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" value="{{ old('captcha') }}" required autocomplete="captcha" autofocus>
+                                
+                                <a href="{{ route('login') }}">Refresh captcha</a>
+
 
                                 @error('captcha')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +74,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -95,8 +97,8 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                        
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -104,4 +106,19 @@
         </div>
     </div>
 </div>
+<script >
+    $('#regen-captcha').on('click', function(e){
+    e.preventDefault();
+ 
+    var anchor = $(this);
+    var captcha = anchor.prev('img');
+ 
+    $.ajax({
+        type: "GET",
+        url: '/ajax_regen_captcha',
+    }).done(function( msg ) {
+        captcha.attr('src', msg);
+    });
+});
+</script>
 @endsection
