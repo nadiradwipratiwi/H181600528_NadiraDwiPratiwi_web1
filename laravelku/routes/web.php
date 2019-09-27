@@ -19,4 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('refresh_captcha', 'HomeController@refreshCaptcha')->name('refresh_captcha');
+Route::get('/refresh_captcha', 'HomeController@refreshCaptcha')->name('refresh_captcha');
+
+Route::get('/kategori_artikel','KategoriArtikelController@index')->name('kategori_artikel.index');
