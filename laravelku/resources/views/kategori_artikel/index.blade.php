@@ -23,6 +23,8 @@
 			<td>User ID</td>
 
 			<td>Create</td>
+
+            <td>Aksi</td>
 		</tr>
 
 		@foreach($listKategoriArtikel as $item)
@@ -35,6 +37,13 @@
 			<td>{!! $item->users_id !!}</td>
 
 			<td>{!! $item->created_at->format('d/m/Y H:i:s') !!}</td>
+
+            <td>
+                <a href="{!! route('kategori_artikel.show',[$item->id])!!}"class="btn btn-sm btn-success" >Lihat</a>
+            </td>
+
+
+
 		</tr>
 
 		@endforeach
